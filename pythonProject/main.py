@@ -8,7 +8,7 @@ async def main():
     global url, df
     df = pd.DataFrame({"Lĩnh vực": [], "Ngành Tiêu Điểm": [], "Công ty": [], "Sdt": [], "Email": []})
     browser = await launch(headless=True,
-                           executablePath='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe')
+                           executablePath='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome')
     url = await browser.newPage()
     await url.goto('https://trangvangvietnam.com/')
 

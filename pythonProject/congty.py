@@ -1,5 +1,7 @@
+import pandas as pd
 async def cong_ty(url, df, linh_vuc, nganh_tieu_diem):
     url_cur = await url.evaluate("() => window.location.href")
+    new_data = []
     for n in range(1, 1000):
         checkexist = await url.querySelector(".page_active")
         if checkexist is None:
@@ -16,6 +18,9 @@ async def cong_ty(url, df, linh_vuc, nganh_tieu_diem):
                 sdt1 = await sdt.getProperty("textContent")
                 email1 = await email.getProperty("href")
                 new_row = {"Lĩnh vực": linh_vuc, "Ngành Tiêu Điểm": nganh_tieu_diem, "Công ty": await cty1.jsonValue(), "Sdt": await sdt1.jsonValue(), "Email": await email1.jsonValue()}
-                df = df.append(new_row, ignore_index=True)
+                new_data.append(new_row)
+                #df = df.append(new_row, ignore_index=True)
+    new_df = pd.DataFrame(new_data)
+    df = pd.concat([df, new_df], ignore_index=True)
     return df
 

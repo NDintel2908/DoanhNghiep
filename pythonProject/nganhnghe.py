@@ -1,5 +1,5 @@
 from congty import cong_ty
-
+import pandas as pd
 
 async def nganh_nghe(url, df, linh_vuc):
     global df1, df2
@@ -18,5 +18,5 @@ async def nganh_nghe(url, df, linh_vuc):
             await link.click()
             await url.waitForNavigation()
             df1 = await cong_ty(url, df, linh_vuc, nganh_tieu_diem)
-            df2 = df2.append(df1, ignore_index=True)
-    df2.to_excel(f"D:\\{linh_vuc}.xlsx")
+            df2 = pd.concat([df2, df1], ignore_index=True)
+    df2.to_excel(f"/Users/danni/Downloads/{linh_vuc}.xlsx")
